@@ -7,6 +7,9 @@ description: Professional experience and skills across multiple disciplines.
 # social links
 instagram_username: pwflint
 github_username: pwflint
+mastodon:
+- username: pwflint
+  instance: mindly.social
 
 show_excerpts: false
 
