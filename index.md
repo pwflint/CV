@@ -2,7 +2,6 @@
 layout: default
 ---
 
-{% include 00-contents.md %}
 
 <br>
 
