@@ -3,14 +3,14 @@ layout: default
 ---
 
 - [Vitals](./01-vitals.md)
-- [Design Experience](./03-experience.md#Design-And-Landscape-Experience)
-- [Design Skill Set](./03-experience.md#Design-Skill-Set)
-- [Seafaring Experience](./03-experience.md#Seafaring-Experience)
-- [Boatbuilding and Shipyard Experience](.03-experience.md#Boatbuilding-and-Shipyard-Experience)
-- [Other Work Experience](./03-experience.md#Other-Work/Volunteer-Experience)
-- [Maritime Credentials and Certificates](./03-experience.md#Maritime-Credentials-and-Certificates)
-- [Education](./03-experience.md#Education)
-- [Skill Set](./03-experience.md#Skill-Set)
+- [Design Experience](#Design-And-Landscape-Experience)
+- [Design Skills](#Design-Skill-Set)
+- [Seafaring Experience](#Seafaring-Experience)
+- [Boatbuilding and Shipyard Experience](#Boatbuilding-and-Shipyard-Experience)
+- [Other Work Experience](#Other-Work/Volunteer-Experience)
+- [Maritime Credentials and Certificates](#Maritime-Credentials-and-Certificates)
+- [Education](#Education)
+- [Life Skills](#Skill-Set)
 
 
 <br>
