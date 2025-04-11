@@ -1,12 +1,11 @@
 title: Curriculum Vitae
 author: Peter W Flint
 email: pwflint@duck.com
-description: > # this means to ignore newlines until "baseurl:"
+description: Professional experience and skills across multiple disciplines.
 
 
 # social links
 instagram_username: pwflint
-mastodon_username: @pwflint@mindly.social
 github_username: pwflint
 
 show_excerpts: false
