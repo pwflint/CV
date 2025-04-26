@@ -1,0 +1,30 @@
+title: Curriculum Vitae
+author: Peter W Flint
+email: pwflint@duck.com
+description: Professional experience and skills across multiple disciplines.
+
+
+# social links
+instagram_username: pwflint
+github_username: pwflint
+mastodon:
+- username: pwflint
+  instance: mindly.social
+
+show_excerpts: false
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  hard_wrap: false
+  auto_ids: true
+  parse_block_html: true
+  parse_span_html: true
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"

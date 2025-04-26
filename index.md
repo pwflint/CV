@@ -2,20 +2,27 @@
 layout: default
 ---
 
-{% include 01-name.md %}
+<div id="name">
+{% capture name %}{% include 01-name.md %}{% endcapture %}
+{{ name | markdownify }}
+</div>
 
-<br>
+<div id="image">
+{% capture image %}{% include 02-image.md %}{% endcapture %}
+{{ image | markdownify }}
+</div>
 
-{% include 02-image.md %}
+<div id="vitals">
+{% capture vitals %}{% include 03-vitals.md %}{% endcapture %}
+{{ vitals | markdownify }}
+</div>
 
-<br>
+<div id="experience">
+{% capture experience %}{% include 04-experience.md %}{% endcapture %}
+{{ experience | markdownify }}
+</div>
 
-{% include 03-vitals.md %}
-
-<br>
-
-{% include 04-experience.md %}
-
-<br>
-
-{% include 05-website.md %}
+<div id="website">
+{% capture website %}{% include 05-website.md %}{% endcapture %}
+{{ website | markdownify }}
+</div>
