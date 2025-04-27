@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWF | Curriculum Vitae</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mako&family=Encode+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --header-height: 60px;
+            --nav-width: 250px;
+            --footer-height: 60px;
+            --primary-color: #2C5530;  /* Dark green for accents */
+            --bg-color: #F5F1E6;      /* Light beige for background */
+            --text-color: #1A365D;    /* Dark navy for main text */
+            --border-color: #D4C9A8;  /* Light brown for borders */
+            --accent-color: #8B4513;  /* Saddle brown for hover states */
+            --heading-color: #2C5530; /* Dark green for headings */
+            --subheading-color: #4A6B3D; /* Medium green for subheadings */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Encode Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            display: grid;
+            grid-template-areas:
+                "header header"
+                "nav main"
+                "footer footer";
+            grid-template-columns: var(--nav-width) 1fr;
+            grid-template-rows: var(--header-height) 1fr auto;
+            min-height: 100vh;
+        }
+
+        header {
+            grid-area: header;
+            background-color: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            width: 100%;
+            height: var(--header-height);
+            z-index: 100;
+        }
+
+        .header-title {
+            flex: 1;
+        }
+
+        .header-contact {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-contact a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s ease;
+        }
+
+        .header-contact a:hover {
+            color: var(--accent-color);
+        }
+
+        nav {
+            grid-area: nav;
+            background-color: var(--bg-color);
+            border-right: 1px solid var(--border-color);
+            padding: 20px;
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            width: var(--nav-width);
+            height: calc(100vh - var(--header-height));
+            overflow-y: auto;
+        }
+
+        main {
+            grid-area: main;
+            padding: 20px;
+            margin-left: var(--nav-width);
+            margin-top: var(--header-height);
+            max-width: 800px;
+        }
+
+        main img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1em auto;
+            border-radius: 4px;
+        }
+
+        main h1, main h2, main h3, main h4, main h5, main h6 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            line-height: 1.25;
+        }
+
+        main h1 { 
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--heading-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.3em;
+        }
+
+        main h2 { 
+            font-size: 1.8em;
+            font-weight: 600;
+            color: var(--heading-color);
+            margin-top: 2em;
+        }
+
+        main h3 { 
+            font-size: 1.4em;
+            font-weight: 500;
+            color: var(--subheading-color);
+            margin-top: 1.5em;
+        }
+
+        main h4 { 
+            font-size: 1.1em;
+            font-weight: 500;
+            color: var(--text-color);
+            font-style: italic;
+        }
+
+        .section-title {
+            font-family: 'Mako', serif;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            color: var(--heading-color);
+        }
+
+        .experience-section h2 {
+            font-family: 'Mako', serif;
+            font-weight: 400;
+            color: var(--heading-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.2em;
+        }
+
+        .experience-section h3 {
+            font-family: 'Encode Sans', sans-serif;
+            font-weight: 500;
+            color: var(--subheading-color);
+        }
+
+        .experience-section h4 {
+            font-family: 'Encode Sans', sans-serif;
+            font-weight: 400;
+            color: var(--text-color);
+        }
+
+        main p {
+            margin-bottom: 16px;
+        }
+
+        main ul, main ol {
+            padding-left: 2em;
+            margin-bottom: 16px;
+        }
+
+        main li {
+            margin-bottom: 0.5em;
+        }
+
+        main a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        main a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            grid-area: footer;
+            background-color: var(--bg-color);
+            border-top: 1px solid var(--border-color);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.5em;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+        }
+
+        .toc {
+            margin: 0;
+            padding: 0;
+        }
+
+        .toc h2 {
+            font-size: 1.2em;
+            margin-bottom: 1em;
+            color: var(--heading-color);
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .toc li {
+            margin: 0.5em 0;
+        }
+
+        .toc a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: block;
+            padding: 0.3em 0;
+        }
+
+        .toc a:hover {
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                grid-template-areas:
+                    "header"
+                    "nav"
+                    "main"
+                    "footer";
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto 1fr auto;
+            }
+
+            nav {
+                position: static;
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            main {
+                margin-left: 0;
+                margin-top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-title">
+            <h1>PWF — Curriculum Vitae</h1>
+        </div>
+        <div class="header-contact">
+            <a href="mailto:pwflint@duck.com" title="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="sms:704-608-1989" title="Text Message">
+                <i class="fas fa-comment-dots"></i>
+            </a>
+        </div>
+    </header>
+
+    <nav>
+        <div class="toc">
+            <h2>Table of Contents</h2>
+            <ul>
+                <li><a href="#design-and-landscape-experience">Design and Landscape Experience</a></li>
+                <li><a href="#seafaring-experience">Seafaring Experience</a></li>
+                <li><a href="#boatbuilding-and-shipyard-experience">Boatbuilding and Shipyard Experience</a></li>
+                <li><a href="#other-work-volunteer-experience">Other Work/Volunteer Experience</a></li>
+                <li><a href="#maritime-credentials-and-certificates">Maritime Credentials and Certificates</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skill-set">Skill Set</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div id="name">
+            <h1>Peter W Flint</h1>
+            <h2>Landscape Designer</h2>
+        </div>
+
+        <div id="image">
+            <img src="2019_Portrait 3_.JPG" alt="Blackrock Mountain">
+        </div>
+
+        <div id="experience">
+            <h1 class="section-title">Experience</h1>
+            
+            <section id="design-and-landscape-experience" class="experience-section">
+                <h2>Design and Landscape Experience</h2>
+                
+                <h3>KALEIOPE Environmental Design - Raleigh, NC</h3>
+                <h4>Proprietor & Design Lead</h4>
+                <p>Local business devoted to regenerative landscape design and management.</p>
+                <p>Summer 2021 to present</p>
+
+                <h3>Currin Outdoor Living - Raleigh, NC</h3>
+                <h4>Designer</h4>
+                <p>Supporting Creative Manager in all aspects of design/sales.</p>
+                <ul>
+                    <li>Pre-qualification, site consultation, analysis, analog and digital drafting.</li>
+                    <li>Estimates</li>
+                    <li>Coordination with subcontractors, vendors and clients.</li>
+                </ul>
+                <p>Winter, Spring 2021</p>
+
+                <h3>NC State University - Raleigh, NC</h3>
+                <h4>Masters Candidate</h4>
+                <ul>
+                    <li>Track III-Landscape Architecture.</li>
+                </ul>
+                <p>2018 to 2020</p>
+
+                <h3>NC State University - Raleigh, NC</h3>
+                <h4>College of Design, Graduate Operations Assistant</h4>
+                <ul>
+                    <li>Responsible for preventative maintenance and improvements in all College facilities</li>
+                    <li>Assist students with project completion</li>
+                    <li>Materials and storage management</li>
+                </ul>
+                <p>2019 to 2020</p>
+
+                <h3>Bee Downtown - Durham, NC</h3>
+                <h4>Apprentice Bee-keeper</h4>
+                <ul>
+                    <li>Responsible for construction and maintenance of apiary equipment for display on corporate campuses</li>
+                    <li>Assisting head bee-keeper in hive care</li>
+                    <li>Harvesting honey.</li>
+                </ul>
+                <p>Summer 2019</p>
+
+                <h3>Sunrise Ranch - Loveland, CO</h3>
+                <h4>Ranch-hand</h4>
+                <ul>
+                    <li>Support role in 300 acres of holistic land management and 6-acre organic garden.</li>
+                    <li>Livestock care, mainly cattle.</li>
+                    <li>Landscape maintenance.</li>
+                </ul>
+                <p>Spring, Summer 2013</p>
+
+                <h3>Reko Patagonia - La Mallín Ahogado, Rio Negro, Argentina</h3>
+                <h4>Volunteer</h4>
+                <ul>
+                    <li>Support role in several build projects</li>
+                    <li>Cooking</li>
+                    <li>Land management</li>
+                    <li>Woodlot management</li>
+                    <li>Household chores.</li>
+                </ul>
+                <p>Fall 2012 - Winter 2013</p>
+
+                <h3>Design Skill Set</h3>
+                <ul>
+                    <li>Intermediate to advanced drafting and modeling in Vectorworks 2022.</li>
+                    <li>Intermediate graphic illustration in Affinity Suite.</li>
+                    <li>Proficient in Adobe Suite.</li>
+                    <li>Analog drafting and illustration.</li>
+                    <li>Watercolor sketching.</li>
+                    <li>Proficient CAD drafting in Autodesk</li>
+                    <li>Familiarity with landscape performance tools and holistic soil testing.</li>
+                    <li>Intermediate mapping and analysis in ArcGIS and QGIS.</li>
+                    <li>Programming basics in R and SQL</li>
+                    <li>Proficient in basic web development, HTML, CSS, and JS</li>
+                </ul>
+
+                <h3>Affiliations</h3>
+                <ul>
+                    <li>Emerging Professional, Association of Professional Landscape Designers</li>
+                    <li>Member, Cornell Lab of Ornithology</li>
+                </ul>
+            </section>
+
+            <section id="seafaring-experience" class="experience-section">
+                <h2>Seafaring Experience</h2>
+
+                <h3>Oliver Hazard Perry - Newport, RI</h3>
+                <h4>Second Mate</h4>
+                <p>Responsible to Captain in all matters pertaining to the outfitting and sea-readiness of newly certified ocean-going vessel.</p>
+                <ul>
+                    <li>Voyage planning</li>
+                    <li>Safety systems</li>
+                    <li>Navigation procedures</li>
+                    <li>OICNW</li>
+                </ul>
+                <p>Off-shore passages. New England, Cuba, Bermuda.</p>
+                <p>Winter & Spring 2017</p>
+
+                <h3>Pride of Baltimore II - Baltimore, MD</h3>
+                <h4>Chief Mate</h4>
+                <p>Responsible to Captain in all matters pertaining to ship's operation.</p>
+                <ul>
+                    <li>OICNW.</li>
+                    <li>In charge of NOAA VOS weather reports.</li>
+                    <li>Offshore passages, daysails, dockside attraction.</li>
+                </ul>
+                <p>Daysails & offshore passages. Chesapeake Bay, Canadian Maritimes, Great Lakes.</p>
+                <p>Winter, Spring, Summer 2016</p>
+
+                <h4>Deckhand/Asst Engineer</h4>
+                <ul>
+                    <li>RFPNW</li>
+                    <li>NOAA VOS weather reporter</li>
+                </ul>
+                <p>Daysails & offshore passages. Chesapeake Bay, New England, Canadian Maritimes, St. Lawrence Seaway, Great Lakes.</p>
+                <p>Winter 2008 - Summer 2009</p>
+
+                <h3>Wilderness Discoverer - Juneau, AK</h3>
+                <h4>2nd Mate/Licensed Deckhand</h4>
+                <ul>
+                    <li>OICNW</li>
+                    <li>Small boat operations</li>
+                    <li>Passenger safety/security</li>
+                </ul>
+                <p>Expedition-based passenger cruises. Southeast Alaska.</p>
+                <p>Winter - Fall 2015</p>
+
+                <h3>Sørlandet - Kristiansand, Norway</h3>
+                <h4>Boatswain</h4>
+                <p>Responsible to Chief Mate in all matters related to deck department.</p>
+                <ul>
+                    <li>Rigging care and maintenance</li>
+                    <li>Supervision of ABs</li>
+                    <li>Instruction of trainees</li>
+                </ul>
+                <p>Blue water voyages. North Sea, Atlantic Ocean, Caribbean Sea, Mediterranean Sea.</p>
+                <p>Summer 2011 - Spring 2013</p>
+
+                <h3>Søren Larsen - Avatiu, Cook Islands</h3>
+                <h4>Boatswain</h4>
+                <p>Responsible to Chief Mate in all matters pertaining to the deck department</p>
+                <ul>
+                    <li>RFPNW</li>
+                    <li>Care and maintenance of rigging, spars, and hull.</li>
+                </ul>
+                <p>Blue water voyages. New Zealand, Western South Pacific.</p>
+                <p>Spring, Summer 2011</p>
+
+                <h3>Roseway - St. Croix, USVI</h3>
+                <h4>First Mate</h4>
+                <p>Responsible to the Captain in all matters aboard ship.</p>
+                <ul>
+                    <li>OICNW</li>
+                    <li>Director of maintenance</li>
+                </ul>
+                <p>Daysails, offshore passages. New England, Canadian Maritimes, St. Lawrence Seaway, Great Lakes, US Virgin Islands.</p>
+                <p>Winter 2010 - Winter 2011</p>
+
+                <h3>Bounty - Greenport, NY</h3>
+                <h4>Able-Bodied Seafarer</h4>
+                <ul>
+                    <li>RFPNW</li>
+                    <li>Rigging maintenance</li>
+                </ul>
+                <p>East Atlantic Ocean, Mediterranean Sea</p>
+                <p>Fall 2007 - Winter 2008</p>
+
+                <h3>Timberwind - Rockport, ME</h3>
+                <h4>Deckhand</h4>
+                <ul>
+                    <li>Outfitting</li>
+                    <li>Daily operations</li>
+                </ul>
+                <p>Inland passenger cruises. Penobscot Bay, ME.</p>
+                <p>Spring, Summer, Fall 2007</p>
+
+                <h3>Ocean Star - Road Harbor, BVI</h3>
+                <h4>Trainee</h4>
+                <p>Offshore passages. BVI, Windward Islands, Leeward Islands.</p>
+                <p>Fall 2005</p>
+            </section>
+
+            <section id="boatbuilding-and-shipyard-experience" class="experience-section">
+                <h2>Boatbuilding and Shipyard Experience</h2>
+
+                <h3>Corwith Cramer - Woods Hole, MA</h3>
+                <h4>Carpenter</h4>
+                <p>Responsible to Captain for carpentry tasks associated with major re-fit. Major projects include re-caulking teak decks, re-building bunk shelving, repairing mooring hardware, cap-rails, and interior defects.</p>
+                <p>Astilleros de Mallorca, Mallorca, ESP</p>
+                <p>Fall 2016</p>
+
+                <h3>Mystic - Mystic, CT</h3>
+                <h4>Chief Mate</h4>
+                <p>Responsible to Captain in mast removal for emergency rig inspection. Supervision of sailing crew in overall fit out. General oversight of yard-managed projects. OICNW during delivery down to USVI.</p>
+                <p>Fairhaven Shipyard, Fairhaven, MA</p>
+                <p>Fall 2014-Winter 2015</p>
+
+                <h3>Northwest School of Wooden Boatbuilding - Port Hadlock, WA</h3>
+                <h4>Student</h4>
+                <p>Professional instruction in all skills related to wooden boat building, including drafting and lofting.</p>
+                <ul>
+                    <li>Construction of Gillett Beachcomber and Atkin Flipper skiffs.</li>
+                    <li>Construction of backbone, transom and frame-up on 36' Chamberlin motor-sailor.</li>
+                </ul>
+                <p>Fall 2013 - Fall 2014</p>
+
+                <h3>Sørlandet - Kristiansand, NO</h3>
+                <h4>Rig Foreman</h4>
+                <p>Responsible to yard foreman for the complete re-assembly of a fully-rigged ship post re-fit.</p>
+                <ul>
+                    <li>Coordinate with shipyard for scheduling use of heavy equipment</li>
+                    <li>Supervise all major installations</li>
+                    <li>Coordinate with Captain and Officers for placement of idle crew in re-installing electronics, safety checks, etc.</li>
+                </ul>
+                <p>Desan Shipyard, Tuzla, Turkey</p>
+                <p>Summer 2012</p>
+
+                <h3>Roseway - St. Croix, USVI</h3>
+                <h4>Foreman</h4>
+                <p>Management of novice crew for routine shipyard maintenance as well as major projects:</p>
+                <ul>
+                    <li>Replace all standing rigging</li>
+                    <li>Replace M.E. exhaust manifold</li>
+                    <li>Replace fore crosstrees.</li>
+                </ul>
+                <p>Gloucester Marine Railway, Gloucester, MA</p>
+                <p>Fall 2010</p>
+
+                <h3>Caledonia - Halifax, NS</h3>
+                <h4>Re-Fit Crew</h4>
+                <ul>
+                    <li>Installation of overheads</li>
+                    <li>Packing transits</li>
+                    <li>General fit-out projects during dry-dock period</li>
+                </ul>
+                <p>Colonna Shipyard, Norfolk, VA</p>
+                <p>Winter 2008</p>
+            </section>
+
+            <section id="other-work-volunteer-experience" class="experience-section">
+                <h2>Other Work/Volunteer Experience</h2>
+
+                <h3>Langston Enterprises - Number Nine, AR</h3>
+                <h4>Press Operator</h4>
+                <ul>
+                    <li>Monitor and trouble-shoot automated bale-pressing, binding, and bagging machinery in large-scale cotton gin.</li>
+                    <li>Maintain accurate, real-time record of bale weights for growers, supplier, and customers.</li>
+                    <li>First stage quality control.</li>
+                    <li>Fire-fighting.</li>
+                </ul>
+                <p>Fall 2016</p>
+
+                <h3>SUWS of the Carolinas - Old Fort, NC</h3>
+                <h4>Field Instructor</h4>
+                <ul>
+                    <li>Monitor safety of at-risk youth in Pisgah National Forest.</li>
+                    <li>Facilitate therapeutic goals as outlined by a licensed social worker.</li>
+                    <li>Provide instruction in primitive living skills.</li>
+                    <li>Foster "leave-no-trace" ethics.</li>
+                </ul>
+                <p>Summer 2009</p>
+            </section>
+        </div>
+        <div id="credentials"> 
+            <h1 class="section-title">Credentials</h1>
+            <section id="maritime-credentials-and-certificates" class="credentials-section">
+                <h2>Maritime Credentials And Certificates</h2>
+                <ul>®
+                    <li>OICNW, Oceans, limited to 3000 GT (STCW II/1)**</li>
+                    <li>Master, 100-ton Aux/Sail, Near Coastal (STCW II/3)</li>
+                    <li>Able Seafarer-Deck</li>
+                    <li>PSC/Lifeboatman</li>
+                    <li>Medical Certificate (STCW A-I/9), valid through 2018</li>
+                    <li>Advanced Firefighting</li>
+                    <li>Radar Observer Unlimited</li>
+                    <li>Medical Care Provider</li>
+                    <li>ECDIS</li>
+                    <li>Human Element Leadership and Management</li>
+                    <li>Bridge Resource Management</li>
+                    <li>TWIC</li>
+                    <li>PADI Rescue Diver</li>
+                </ul>
+            </section>
+
+            <section id="education" class="credentials-section">
+                <h2>Education</h2>
+
+                <h3>Master in Landscape Architecture</h3>
+                <p><strong>North Carolina State University</strong> - Raleigh, NC: Landscape Architecture, 2020</p>
+
+                <h3>Bachelor of Arts</h3>
+                <p><strong>Rhodes College</strong> - Memphis, TN: Philosophy, Education, 2006</p>
+
+                <h3>Associate of Occupational Studies</h3>
+                <p><strong>Northwest School of Wooden Boatbuilding</strong> - Port Hadlock, WA: Traditional Large Craft, Yacht Interiors and Joinery, 2014</p>
+            </section>
+
+            <section id="skill-set" class="experience-section">
+                <h2>Skill Set</h2>
+                <ul>
+                    <li>Traditional and modern ship rigging</li>
+                    <li>Boatbuilding fundamentals. Curved and circular carpentry</li>
+                    <li>Crane, aerial boom-lift, heavy lifting operations</li>
+                    <li>Marlinspike seamanship, including fancywork</li>
+                    <li>Marine finishing, including epoxy paints and varnish</li>
+                    <li>Basic electricity and plumbing</li>
+                    <li>Coastal, celestial navigation</li>
+                    <li>Basic meteorology and forecasting</li>
+                    <li>Voyage outfitting and planning</li>
+                    <li>Basic welding, thermal cutting, tool-making, and blacksmithing</li>
+                    <li>Underwater boat maintenance and repair</li>
+                    <li>Drafting, lofting, technical drawing, and design fundamentals</li>
+                    <li>Proficient Spanish. Basic Swahili</li>
+                    <li>Proficient in Word-Processing and Spreadsheet programs, including Word and Excel</li>
+                    <li>Proficient in On-board Maintenance programs such as Wheelhouse and TM Master.</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://kaeliope.design" target="_blank" title="KALEIOPE Environmental Design">
+                <i class="fas fa-leaf"></i>
+            </a>
+            <a href="https://github.com/pwflint" target="_blank" title="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://instagram.com/pwflint" target="_blank" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://mindly.social/@pwflint" target="_blank" title="Mastodon">
+                <i class="fab fa-mastodon"></i>
+            </a>
+        </div>
+    </footer>
+</body>
+</html> 

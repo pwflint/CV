@@ -27,7 +27,7 @@ Winter, Spring 2021
 - Assist students with project completion
 - Materials and storage management 
 
-January 2019 to December 2020
+2019 to 2020
 
 ### Bee Downtown - Durham, NC
 #### Apprentice Bee-keeper
@@ -56,15 +56,16 @@ Spring, Summer 2013
 Fall 2012 - Winter 2013
 
 ### Design Skill Set
-- Intermediate to advanced drafting and modeling in Vectorworks 2021.
+- Intermediate to advanced drafting and modeling in Vectorworks 2022.
 - Intermediate graphic illustration in Affinity Suite.
 - Proficient in Adobe Suite.
-- Proficient CAD drafting in Autodesk
-- Familiarity with landscape performance tools and holistic soil testing.
-- Proficient in ArcGIS and QGIS.
 - Analog drafting and illustration.
 - Watercolor sketching.
-- Programming basics in R, SQL, AppleScript, Python
+- Proficient CAD drafting in Autodesk
+- Familiarity with landscape performance tools and holistic soil testing.
+- Intermediate mapping and analysis in ArcGIS and QGIS.
+- Programming basics in R and SQL
+- Proficient in basic web development, HTML, CSS, and JS
 
 ## Affiliations
 - Emerging Professional, Association of Professional Landscape Designers
