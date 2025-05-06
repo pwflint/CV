@@ -55,6 +55,9 @@
             width: 100%;
             height: var(--header-height);
             z-index: 100;
+            flex-direction: row;
+            text-align: left;
+            padding-bottom: 0;
         }
 
         .header-title {
@@ -82,7 +85,7 @@
             grid-area: nav;
             background-color: var(--bg-color);
             border-right: 1px solid var(--border-color);
-            padding: 20px;
+            padding: 15px 20px;
             position: fixed;
             top: var(--header-height);
             left: 0;
@@ -93,9 +96,11 @@
 
         main {
             grid-area: main;
-            padding: 20px;
-            margin-left: var(--nav-width);
+            padding: 15px;
             margin-top: var(--header-height);
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 20px;
             max-width: 800px;
         }
 
@@ -113,30 +118,30 @@
             line-height: 1.25;
         }
 
-        main h1 { 
-            font-size: 2.5em;
+        main h1 {
+            font-size: 2em;
             font-weight: 700;
             color: var(--heading-color);
             border-bottom: 2px solid var(--border-color);
             padding-bottom: 0.3em;
         }
 
-        main h2 { 
-            font-size: 1.8em;
+        main h2 {
+            font-size: 1.5em;
             font-weight: 600;
             color: var(--heading-color);
             margin-top: 2em;
         }
 
-        main h3 { 
-            font-size: 1.4em;
+        main h3 {
+            font-size: 1.2em;
             font-weight: 500;
             color: var(--subheading-color);
             margin-top: 1.5em;
         }
 
-        main h4 { 
-            font-size: 1.1em;
+        main h4 {
+            font-size: 1em;
             font-weight: 500;
             color: var(--text-color);
             font-style: italic;
@@ -249,29 +254,224 @@
             color: var(--accent-color);
         }
 
+        /* Add scroll-behavior for smooth scrolling (optional but nice) */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Add margin to scroll targets equal to header height */
+        section[id],
+        main h1[id],
+        main h2[id] { /* Include other potential targets with IDs */
+            scroll-margin-top: var(--header-height);
+        }
+
+        /* New styles for hamburger menu */
+        .nav-toggle {
+            display: none; /* Hidden by default on desktop */
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5em;
+            cursor: pointer;
+            padding: 10px;
+        }
+
         @media (max-width: 768px) {
             body {
                 grid-template-areas:
                     "header"
-                    "nav"
-                    "main"
+                    "main" /* Nav removed from grid area */
                     "footer";
                 grid-template-columns: 1fr;
-                grid-template-rows: auto auto 1fr auto;
+                grid-template-rows: auto 1fr auto;
             }
 
+            header {
+                padding: 0 15px;
+                flex-direction: row; /* Keep row for header items */
+                height: var(--header-height); /* Keep height */
+                text-align: left;
+                padding-bottom: 0;
+                justify-content: space-between; /* Space between title, contact, and toggle */
+                 align-items: center; /* Vertically center items */
+            }
+
+             .header-title {
+                flex-grow: 1; /* Allow title to take available space */
+             }
+
+            /* Adjust header title size on mobile */
+            .header-title h1 {
+                 font-size: 1.5em; /* Smaller font size for mobile header title */
+                 margin-bottom: 0; /* Remove any default bottom margin */
+            }
+
+            .header-contact {
+                gap: 15px;
+                justify-content: flex-end;
+                align-items: center;
+                /* Removed width: auto; as flex-grow on title handles spacing */
+            }
+
+            /* Show toggle button on mobile */
+            .nav-toggle {
+                display: block;
+            }
+
+            /* Hide nav by default on mobile */
             nav {
-                position: static;
+                display: none;
                 width: 100%;
                 height: auto;
                 border-right: none;
                 border-bottom: 1px solid var(--border-color);
+                padding: 15px 20px;
+            }
+
+            /* Style for when nav is open (requires JS to add this class) */
+            body.nav-open nav {
+                 display: block; /* Show nav */
+                 position: fixed; /* Position over content */
+                 top: var(--header-height); /* Position below the header */
+                 left: 0;
+                 width: 100%; /* Full width */
+                 height: calc(100vh - var(--header-height)); /* Full height minus header */
+                 background-color: var(--bg-color); /* Add background to hide content behind */
+                 overflow-y: auto; /* Ensure menu is scrollable if needed */
+                 z-index: 99; /* Ensure it's above main content but below header if header z-index is higher */
+                 padding-top: 20px; /* Add some padding at the top of the menu */
+                 padding-bottom: 20px; /* Add some padding at the bottom */
+            }
+
+            /* Prevent body scroll when nav is open (optional but good UX) */
+            body.nav-open {
+                overflow: hidden;
+            }
+
+            .toc h2 {
+                text-align: left;
+                margin-bottom: 1em;
+            }
+
+            .toc ul {
+                padding-left: 2em;
+            }
+
+            .toc li {
+                text-align: left;
             }
 
             main {
-                margin-left: 0;
+                /* Adjusted margin for mobile centering */
                 margin-top: 0;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 15px; /* Adjust bottom margin for mobile */
+                padding: 15px;
             }
+
+            main h1 {
+                font-size: 2em;
+            }
+
+            main h2 {
+                font-size: 1.5em;
+            }
+
+            main h3 {
+                font-size: 1.2em;
+            }
+
+            main h4 {
+                font-size: 1em;
+            }
+        }
+
+        /* New styles for intro section overlay */
+        .intro-section {
+            position: relative; /* Establishes positioning context for absolute children */
+            width: 100%; /* Take full width of the main content area */
+            margin-bottom: 20px; /* Add space below the intro section */
+            line-height: 1.2; /* Adjust line height for overlaid text */
+        }
+
+        .intro-section #image {
+             /* No specific width/height needed here, img inside will fill */
+             line-height: 0; /* Remove extra space below the image */
+        }
+
+        .intro-section #image img {
+            display: block; /* Ensure image is block level */
+            width: 100%; /* Make image take full width of its container */
+            height: auto; /* Maintain aspect ratio */
+            /* Removed margin: 1em auto; as container handles positioning */
+        }
+
+        .intro-section #name {
+            position: absolute; /* Keep absolute positioning */
+            top: 0;
+            left: 0;
+            right: auto; /* Ensure no conflicting right position */
+            bottom: auto; /* Ensure no conflicting bottom position */
+
+            /* Removed width: 100%; */
+            /* Instead, let content determine width or set a max-width if needed */
+             max-width: 80%; /* Example: Limit width to prevent text from spanning too much */
+            padding: 20px; /* Keep padding */
+            color: #fff; /* Default text color (will be overridden by gradient) */
+            z-index: 1; /* Ensure it's above the image */
+            text-align: left; /* Align text to the left */
+        }
+
+        .intro-section #name h1,
+        .intro-section #name h2 {
+            margin: 0; /* Remove default margins */
+            padding: 0; /* Remove default padding */
+            color: #fff; /* Fallback color */
+            line-height: 1.2; /* Adjust line height */
+        }
+
+        /* Gradient text styling and separator */
+        .intro-section #name h1 {
+            font-size: 2.5em; /* Keep size as needed */
+            /* Apply gradient using color variables and stop */
+            background: linear-gradient(
+               to bottom, /* Direction top to bottom */
+                var(--subheading-color), /* Medium green at top */
+                var(--border-color) 45% /* Light brown, Start transition around 25% from top */
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text; /* Standard property */
+            text-fill-color: transparent; /* Standard property */
+            border-bottom: none; /* Explicitly remove the border from THIS h1 */
+            padding-bottom: 0; /* Explicitly remove the padding from THIS h1 */
+        }
+
+        /* Style for the SVG separator line */
+        .intro-section #name .heading-separator {
+            display: block; /* Treat SVG as a block element */
+            margin-top: 5px; /* Space below the h1 */
+            margin-bottom: 10px; /* Space above the h2 */
+            stroke: var(--bg-color); /* Color of the line using variable (as requested) */
+            stroke-width: 0.5; /* Stroke thickness */
+            width: 100%; /* Example width, adjust as needed */
+        }
+
+        .intro-section #name h2 {
+             font-size: 1.5em; /* Keep size as needed */
+             font-style: normal; /* Remove italic style from general h4 */
+              /* Apply a gradient using color variables and stop */
+              background: linear-gradient(
+                to bottom, /* Direction top to bottom */
+                var(--bg-color) 60%, /* Light beige at top */
+                var(--text-color) /* Dark navy, Start transition around 75% from top (bottom 25%) */
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
         }
     </style>
 </head>
@@ -288,6 +488,9 @@
                 <i class="fas fa-comment-dots"></i>
             </a>
         </div>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+             <i class="fas fa-bars"></i>
+        </button>
     </header>
 
     <nav>
@@ -306,13 +509,19 @@
     </nav>
 
     <main>
-        <div id="name">
-            <h1>Peter W Flint</h1>
-            <h2>Landscape Designer</h2>
-        </div>
-
-        <div id="image">
-            <img src="2019_Portrait 3_.JPG" alt="Blackrock Mountain">
+        <!-- New container div for intro section -->
+        <div class="intro-section">
+            <div id="image">
+                <img src="2019_Portrait 3_.JPG" alt="Blackrock Mountain">
+            </div>
+            <div id="name">
+                <h1>Peter W Flint</h1>
+                <!-- SVG line separator -->
+                <svg class="heading-separator" width="100%" height="2" viewBox="0 0 100 2" preserveAspectRatio="none">
+                    <line x1="0" y1="1" x2="100" y2="1" vector-effect="non-scaling-stroke"/>
+                </svg>
+                <h2>Landscape Designer</h2>
+            </div>
         </div>
 
         <div id="experience">
@@ -655,5 +864,28 @@
             </a>
         </div>
     </footer>
+
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const body = document.body;
+        // Select all links within the Table of Contents (TOC)
+        const navLinks = document.querySelectorAll('.toc a'); 
+
+        // Toggle navigation menu when the hamburger button is clicked
+        navToggle.addEventListener('click', () => {
+            body.classList.toggle('nav-open');
+        });
+
+        // Close navigation menu when a link inside it is clicked (for mobile overlay)
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                // Check if the nav is currently open in mobile view (body has the class)
+                if (body.classList.contains('nav-open')) {
+                    body.classList.remove('nav-open');
+                }
+                // Note: The browser automatically handles navigation to the #ID anchor
+            });
+        });
+    </script>
 </body>
 </html> 
