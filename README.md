@@ -38,9 +38,6 @@ A static website version of my curriculum vitae, built with HTML and CSS.
 ## Deployment
 This site is deployed using GitHub Pages. The main file is `index.html`.
 
-## Local Development
-Since this is now a static site, you can simply open `index.html` in any web browser to view it locally.
-
 ## Future Improvements
 - [ ] Add dark mode support
 - [ ] Optimize image loading
