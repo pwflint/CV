@@ -42,6 +42,5 @@ This site is deployed using GitHub Pages. The main file is `index.html`.
 - [ ] Add dark mode support
 - [ ] Optimize image loading
 - [ ] Add print stylesheet
-- [ ] Consider adding a PDF export option
-- [ ] Add more interactive elements
-- [ ] Consider adding a blog section
+- [ ] Add a PDF export option
+
