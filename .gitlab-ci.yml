@@ -1,9 +1,96 @@
+# GitLab CI/CD Pipeline for CV Website Deployment
+# NOTE: This repository uses GitHub Pages for deployment via GitHub Actions
+# This GitLab CI/CD configuration is provided as an alternative option
+# if you want to deploy to GitLab Pages instead
+#
+# Primary deployment: GitHub Pages (see .github/workflows/pages.yml)
+# Alternative deployment: GitLab Pages (this file)
+
+stages:
+  - build
+  - deploy
+
+variables:
+  # Set your deployment target here
+  DEPLOY_BRANCH: "main"
+  # For GitLab Pages, the public directory
+  PUBLIC_DIR: "."
+
+# Build stage - validate HTML/CSS if needed
+build:
+  stage: build
+  image: node:18-alpine
+  script:
+    - echo "Building CV website..."
+    - |
+      # Optional: Add HTML validation or other build steps here
+      # For now, we'll just verify the main file exists
+      if [ ! -f "index.html" ]; then
+        echo "Error: index.html not found!"
+        exit 1
+      fi
+      echo "✓ index.html found"
+    - |
+      # Optional: Validate HTML structure (requires html-validator package)
+      # npm install -g html-validator
+      # html-validator --file index.html
+  artifacts:
+    paths:
+      - index.html
+      - print.css
+      - "*.JPG"
+      - "*.jpg"
+      - "*.png"
+    expire_in: 1 hour
+  only:
+    - main
+    - master
+    - merge_requests
+
+# Deploy to GitLab Pages
 pages:
   stage: deploy
+  image: alpine:latest
   script:
-    - cp -r * .public
+    - echo "Deploying to GitLab Pages..."
+    - |
+      # Copy all necessary files to public directory
+      mkdir -p public
+      cp -r index.html print.css public/ 2>/dev/null || true
+      # Copy images
+      cp -r *.JPG *.jpg *.png public/ 2>/dev/null || true
+      # Copy any other assets
+      if [ -d "assets" ]; then
+        cp -r assets public/ 2>/dev/null || true
+      fi
+    - echo "✓ Files copied to public directory"
+    - echo "Deployment complete! Site will be available at:"
+    - echo "https://$CI_PROJECT_NAMESPACE.gitlab.io/$CI_PROJECT_NAME"
   artifacts:
     paths:
       - public
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  only:
+    - main
+    - master
+
+# Alternative: Deploy to external server via SSH
+# Uncomment and configure if deploying to your own server
+# deploy:
+#   stage: deploy
+#   image: alpine:latest
+#   before_script:
+#     - apk add --no-cache openssh-client rsync
+#     - eval $(ssh-agent -s)
+#     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+#     - mkdir -p ~/.ssh
+#     - chmod 700 ~/.ssh
+#     - ssh-keyscan -H $DEPLOY_SERVER >> ~/.ssh/known_hosts
+#   script:
+#     - echo "Deploying to $DEPLOY_SERVER..."
+#     - rsync -avz --delete ./ $DEPLOY_USER@$DEPLOY_SERVER:$DEPLOY_PATH/
+#   only:
+#     - main
+#     - master
+#   environment:
+#     name: production
+#     url: https://your-domain.com
