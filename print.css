@@ -1,0 +1,172 @@
+/* Print Stylesheet for CV */
+
+/* Reset margins and padding for print */
+@page {
+    margin: 1.5cm;
+    size: A4;
+}
+
+/* Hide non-essential elements when printing */
+header,
+nav,
+footer,
+.theme-toggle,
+.pdf-export-btn,
+.nav-toggle {
+    display: none !important;
+}
+
+/* Adjust body layout for print */
+body {
+    display: block !important;
+    grid-template-areas: none !important;
+    grid-template-columns: none !important;
+    grid-template-rows: none !important;
+    background: white !important;
+    color: black !important;
+}
+
+/* Main content adjustments */
+main {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* Typography adjustments for print */
+h1, h2, h3, h4, h5, h6 {
+    color: black !important;
+    page-break-after: avoid;
+    page-break-inside: avoid;
+}
+
+h1 {
+    font-size: 24pt !important;
+    margin-top: 20pt !important;
+    margin-bottom: 12pt !important;
+}
+
+h2 {
+    font-size: 18pt !important;
+    margin-top: 16pt !important;
+    margin-bottom: 10pt !important;
+    border-bottom: 1pt solid #ccc !important;
+}
+
+h3 {
+    font-size: 14pt !important;
+    margin-top: 12pt !important;
+    margin-bottom: 8pt !important;
+}
+
+h4 {
+    font-size: 12pt !important;
+    margin-top: 10pt !important;
+    margin-bottom: 6pt !important;
+}
+
+/* Text and links */
+p, li {
+    color: black !important;
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+}
+
+a {
+    color: black !important;
+    text-decoration: underline !important;
+}
+
+/* Lists */
+ul, ol {
+    margin-bottom: 10pt !important;
+    padding-left: 20pt !important;
+}
+
+li {
+    margin-bottom: 4pt !important;
+}
+
+/* Sections */
+section {
+    page-break-inside: avoid;
+    margin-bottom: 15pt !important;
+}
+
+/* Intro section adjustments */
+.intro-section {
+    margin-bottom: 20pt !important;
+}
+
+.intro-section #image img {
+    max-width: 100% !important;
+    height: auto !important;
+    margin-bottom: 10pt !important;
+}
+
+.intro-section #name {
+    position: static !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    color: black !important;
+}
+
+.intro-section #name h1,
+.intro-section #name h2 {
+    color: black !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: black !important;
+    background-clip: unset !important;
+}
+
+.intro-section #name .heading-separator {
+    stroke: black !important;
+}
+
+/* Experience sections */
+.experience-section {
+    margin-bottom: 15pt !important;
+}
+
+/* Avoid page breaks inside important content blocks */
+.experience-section h3 + ul,
+.experience-section h4 + p {
+    page-break-inside: avoid;
+}
+
+/* Table of contents - hidden in print */
+.toc {
+    display: none !important;
+}
+
+/* Ensure good page breaks */
+section[id] {
+    page-break-before: auto;
+}
+
+/* Print URL at bottom of each page */
+@page {
+    @bottom-right {
+        content: "Curriculum Vitae - Peter W Flint";
+        font-size: 8pt;
+        color: #666;
+    }
+}
+
+/* Optimize for black and white printing */
+* {
+    background: white !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+/* Ensure images print well */
+img {
+    max-width: 100% !important;
+    height: auto !important;
+    page-break-inside: avoid;
+}

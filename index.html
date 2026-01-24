@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mako&family=Encode+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="print.css" media="print">
+    <script defer src="https://analytics.hill-st.nohost.me/script.js" data-website-id="aa5dc645-42dd-4eb9-8ce4-7793387f2f00"></script>
     <style>
         :root {
             --header-height: 60px;
@@ -20,6 +22,17 @@
             --accent-color: #8B4513;  /* Saddle brown for hover states */
             --heading-color: #2C5530; /* Dark green for headings */
             --subheading-color: #4A6B3D; /* Medium green for subheadings */
+        }
+
+        /* Dark mode with earth/water tones */
+        [data-theme="dark"] {
+            --primary-color: #5A7A5A;      /* Muted green - earth tone */
+            --bg-color: #1F2A1F;          /* Deep forest green - dark earth */
+            --text-color: #D4C9A8;        /* Light beige - matches light mode border */
+            --border-color: #3D4A3D;     /* Medium muted green */
+            --accent-color: #8B7355;      /* Muted brown - earth tone */
+            --heading-color: #7A9A7A;    /* Soft green - water/earth blend */
+            --subheading-color: #6B8A6B;  /* Medium muted green */
         }
 
         * {
@@ -70,15 +83,39 @@
             align-items: center;
         }
 
-        .header-contact a {
+        .header-contact a,
+        .header-contact button {
             color: var(--text-color);
             text-decoration: none;
             font-size: 1.2em;
             transition: color 0.3s ease;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
         }
 
-        .header-contact a:hover {
+        .header-contact a:hover,
+        .header-contact button:hover {
             color: var(--accent-color);
+        }
+
+
+        .pdf-export-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin: 20px auto;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .pdf-export-btn:hover {
+            background-color: var(--accent-color);
         }
 
         nav {
@@ -110,6 +147,15 @@
             display: block;
             margin: 1em auto;
             border-radius: 4px;
+        }
+
+        main img[loading="lazy"] {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        main img[loading="lazy"].loaded {
+            opacity: 1;
         }
 
         main h1, main h2, main h3, main h4, main h5, main h6 {
@@ -479,6 +525,12 @@
             <h1>PWF — Curriculum Vitae</h1>
         </div>
         <div class="header-contact">
+            <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+            <a href="#" id="pdf-export-header" aria-label="Export as PDF" title="Export as PDF">
+                <i class="fas fa-file-pdf"></i>
+            </a>
             <a href="mailto:pwflint@duck.com" title="Email">
                 <i class="fas fa-envelope"></i>
             </a>
@@ -510,7 +562,7 @@
         <!-- New container div for intro section -->
         <div class="intro-section">
             <div id="image">
-                <img src="2019_Portrait 3_.JPG" alt="Blackrock Mountain">
+                <img src="2019_Portrait 3_.JPG" alt="Blackrock Mountain" loading="lazy" decoding="async">
             </div>
             <div id="name">
                 <h1>Peter W Flint</h1>
@@ -844,6 +896,9 @@
                 </ul>
             </section>
         </div>
+        <button class="pdf-export-btn" id="pdf-export-main">
+            <i class="fas fa-file-pdf"></i> Export as PDF
+        </button>
     </main>
 
     <footer>
@@ -883,6 +938,88 @@
                 }
                 // Note: The browser automatically handles navigation to the #ID anchor
             });
+        });
+
+        // Dark mode toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle[aria-label="Toggle dark mode"]');
+        const themeIcon = document.getElementById('theme-icon');
+        
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            if (themeIcon) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        }
+
+        if (themeToggle && themeIcon) {
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                
+                // Update icon
+                if (newTheme === 'dark') {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                } else {
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                }
+            });
+        }
+
+        // PDF Export functionality
+        const pdfExportBtn = document.getElementById('pdf-export-header');
+        const pdfExportBtnMain = document.getElementById('pdf-export-main');
+        
+        function exportToPDF(e) {
+            if (e) {
+                e.preventDefault();
+            }
+            window.print();
+        }
+
+        if (pdfExportBtn) {
+            pdfExportBtn.addEventListener('click', exportToPDF);
+        }
+        if (pdfExportBtnMain) {
+            pdfExportBtnMain.addEventListener('click', exportToPDF);
+        }
+
+        // Lazy loading image handler
+        document.addEventListener('DOMContentLoaded', () => {
+            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+            
+            if ('loading' in HTMLImageElement.prototype) {
+                // Native lazy loading supported
+                lazyImages.forEach(img => {
+                    img.addEventListener('load', () => {
+                        img.classList.add('loaded');
+                    });
+                    if (img.complete) {
+                        img.classList.add('loaded');
+                    }
+                });
+            } else {
+                // Fallback for browsers without native lazy loading
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src || img.src;
+                            img.classList.add('loaded');
+                            observer.unobserve(img);
+                        }
+                    });
+                });
+
+                lazyImages.forEach(img => imageObserver.observe(img));
+            }
         });
     </script>
 </body>
