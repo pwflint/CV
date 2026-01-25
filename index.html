@@ -478,14 +478,14 @@
             line-height: 1.2; /* Adjust line height */
         }
 
-        /* Gradient text styling and separator */
+        /* Gradient text styling and separator - keep same in dark mode for readability */
         .intro-section #name h1 {
             font-size: 2.5em; /* Keep size as needed */
-            /* Apply gradient using color variables and stop */
+            /* Apply gradient using color variables and stop - keep original colors */
             background: linear-gradient(
                to bottom, /* Direction top to bottom */
-                var(--subheading-color), /* Medium green at top */
-                var(--border-color) 45% /* Light brown, Start transition around 25% from top */
+                #4A6B3D, /* Medium green at top - fixed color */
+                #D4C9A8 45% /* Light brown - fixed color for readability */
             );
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -499,7 +499,7 @@
             display: block; /* Treat SVG as a block element */
             margin-top: 5px; /* Space below the h1 */
             margin-bottom: 10px; /* Space above the h2 */
-            stroke: var(--bg-color); /* Color of the line using variable (as requested) */
+            stroke: #F5F1E6; /* Fixed light beige for readability */
             stroke-width: 0.5; /* Stroke thickness */
             width: 100%; /* Example width, adjust as needed */
         }
@@ -507,11 +507,11 @@
         .intro-section #name h2 {
              font-size: 1.5em; /* Keep size as needed */
              font-style: normal; /* Remove italic style from general h4 */
-              /* Apply a gradient using color variables and stop */
+              /* Apply a gradient using fixed colors for readability */
               background: linear-gradient(
                 to bottom, /* Direction top to bottom */
-                var(--bg-color) 60%, /* Light beige at top */
-                var(--text-color) /* Dark navy, Start transition around 75% from top (bottom 25%) */
+                #F5F1E6 60%, /* Light beige at top - fixed color */
+                #1A365D /* Dark navy - fixed color for readability */
             );
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;

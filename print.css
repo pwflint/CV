@@ -2,7 +2,7 @@
 
 /* Reset margins and padding for print */
 @page {
-    margin: 1.5cm;
+    margin: 1cm;
     size: A4;
 }
 
@@ -39,14 +39,26 @@ main {
 /* Typography adjustments for print */
 h1, h2, h3, h4, h5, h6 {
     color: black !important;
-    page-break-after: avoid;
-    page-break-inside: avoid;
+    page-break-inside: avoid !important;
+    page-break-after: avoid !important;
+    page-break-before: auto !important;
+    orphans: 3 !important;
+    widows: 3 !important;
 }
 
 h1 {
     font-size: 24pt !important;
-    margin-top: 20pt !important;
+    margin-top: 0 !important;
+    margin-bottom: 8pt !important;
+    page-break-after: avoid !important;
+    page-break-before: auto !important;
+}
+
+h1.section-title {
+    margin-top: 24pt !important;
     margin-bottom: 12pt !important;
+    page-break-after: avoid !important;
+    page-break-before: auto !important;
 }
 
 h2 {
@@ -54,18 +66,42 @@ h2 {
     margin-top: 16pt !important;
     margin-bottom: 10pt !important;
     border-bottom: 1pt solid #ccc !important;
+    page-break-after: avoid !important;
+    page-break-before: auto !important;
 }
 
 h3 {
     font-size: 14pt !important;
     margin-top: 12pt !important;
     margin-bottom: 8pt !important;
+    page-break-after: avoid !important;
+    page-break-before: auto !important;
+    orphans: 2 !important;
+    widows: 2 !important;
 }
 
 h4 {
     font-size: 12pt !important;
     margin-top: 10pt !important;
     margin-bottom: 6pt !important;
+    page-break-after: avoid !important;
+    page-break-before: auto !important;
+}
+
+h5 {
+    font-size: 11pt !important;
+    margin-top: 8pt !important;
+    margin-bottom: 6pt !important;
+    page-break-after: avoid !important;
+    page-break-before: auto !important;
+}
+
+h6 {
+    font-size: 10pt !important;
+    margin-top: 8pt !important;
+    margin-bottom: 6pt !important;
+    page-break-after: avoid !important;
+    page-break-before: auto !important;
 }
 
 /* Text and links */
@@ -92,26 +128,77 @@ li {
 
 /* Sections */
 section {
-    page-break-inside: avoid;
+    page-break-inside: auto !important;
     margin-bottom: 15pt !important;
 }
 
-/* Intro section adjustments */
+/* Intro section adjustments - name above image for print */
 .intro-section {
-    margin-bottom: 20pt !important;
+    position: static !important;
+    display: flex !important;
+    flex-direction: column !important;
+    margin-bottom: 10pt !important;
+    margin-top: 0 !important;
+    padding: 0 !important;
+    page-break-inside: avoid !important;
+    page-break-after: avoid !important;
+}
+
+/* Reorder: name first, then image */
+.intro-section #name {
+    position: static !important;
+    order: 1 !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    padding-bottom: 8pt !important;
+    margin: 0 !important;
+    color: black !important;
+    page-break-after: avoid !important;
+}
+
+.intro-section #name h1 {
+    margin-top: 0 !important;
+    margin-bottom: 4pt !important;
+    font-size: 28pt !important;
+    padding: 0 !important;
+    page-break-after: avoid !important;
+}
+
+.intro-section #name h2 {
+    margin-top: 0 !important;
+    margin-bottom: 8pt !important;
+    font-size: 16pt !important;
+    padding: 0 !important;
+    page-break-after: avoid !important;
+}
+
+.intro-section #name .heading-separator {
+    display: none !important;
+}
+
+.intro-section #image {
+    position: static !important;
+    order: 2 !important;
+    width: 200pt !important;
+    max-width: 200pt !important;
+    margin: 0 auto 8pt auto !important;
+    padding: 0 !important;
+    display: block !important;
+    visibility: visible !important;
+    page-break-before: avoid !important;
+    page-break-after: avoid !important;
 }
 
 .intro-section #image img {
-    max-width: 100% !important;
+    max-width: 200pt !important;
+    width: 200pt !important;
     height: auto !important;
-    margin-bottom: 10pt !important;
-}
-
-.intro-section #name {
-    position: static !important;
-    max-width: 100% !important;
+    margin: 0 !important;
     padding: 0 !important;
-    color: black !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    page-break-inside: avoid !important;
 }
 
 .intro-section #name h1,
@@ -128,14 +215,45 @@ section {
 }
 
 /* Experience sections */
+#experience {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    page-break-before: avoid !important;
+}
+
 .experience-section {
     margin-bottom: 15pt !important;
+}
+
+/* Ensure experience section headings follow page-break rules */
+.experience-section h2,
+.experience-section h3,
+.experience-section h4 {
+    page-break-after: avoid !important;
+    page-break-before: auto !important;
+    page-break-inside: avoid !important;
 }
 
 /* Avoid page breaks inside important content blocks */
 .experience-section h3 + ul,
 .experience-section h4 + p {
     page-break-inside: avoid;
+}
+
+/* Keep h3 headings with their following content */
+h3 {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+    orphans: 2 !important;
+    widows: 2 !important;
+}
+
+/* Prevent page break before elements immediately following h3 */
+h3 + h4,
+h3 + p,
+h3 + ul {
+    page-break-before: avoid !important;
+    break-before: avoid !important;
 }
 
 /* Table of contents - hidden in print */
@@ -145,7 +263,8 @@ section {
 
 /* Ensure good page breaks */
 section[id] {
-    page-break-before: auto;
+    page-break-before: auto !important;
+    page-break-inside: auto !important;
 }
 
 /* Print URL at bottom of each page */
@@ -164,9 +283,32 @@ section[id] {
     text-shadow: none !important;
 }
 
+/* Exception: ensure images are visible */
+img,
+.intro-section #image,
+.intro-section #image img {
+    background: transparent !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: block !important;
+}
+
 /* Ensure images print well */
 img {
     max-width: 100% !important;
     height: auto !important;
-    page-break-inside: avoid;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    page-break-inside: avoid !important;
+    page-break-before: avoid !important;
+    page-break-after: avoid !important;
+}
+
+/* Ensure intro section image is visible */
+.intro-section #image,
+.intro-section #image img {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
