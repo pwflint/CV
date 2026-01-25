@@ -10,9 +10,32 @@ permissions:
   id-token: write
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Validate files
+        run: |
+          echo "Validating CV website files..."
+          if [ ! -f "index.html" ]; then
+            echo "Error: index.html not found!"
+            exit 1
+          fi
+          echo "✓ index.html found"
+          if [ ! -f "print.css" ]; then
+            echo "Warning: print.css not found"
+          else
+            echo "✓ print.css found"
+          fi
+          echo "✓ Build validation complete"
+  
   deploy:
+    needs: build
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
